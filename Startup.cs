@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging;
 using SWIAPI.Data;
+using SWIAPI.Services;
 
 namespace SWIAPI
 {
@@ -32,6 +33,8 @@ namespace SWIAPI
 
             services.AddSingleton<IPeopleImageDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<PeopleImageDatabaseSettings>>().Value);
+
+            services.AddSingleton<PeopleImageService>();
 
             services.AddControllers();
         }
