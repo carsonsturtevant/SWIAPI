@@ -30,11 +30,15 @@ namespace SWIAPI
         {
             services.Configure<PeopleImageDatabaseSettings>(
                 Configuration.GetSection(nameof(PeopleImageDatabaseSettings)));
-
             services.AddSingleton<IPeopleImageDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<PeopleImageDatabaseSettings>>().Value);
-
             services.AddSingleton<PeopleImageService>();
+
+            services.Configure<FilmImageDatabaseSettings>(
+                Configuration.GetSection(nameof(FilmImageDatabaseSettings)));
+            services.AddSingleton<IFilmImageDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<FilmImageDatabaseSettings>>().Value);
+            services.AddSingleton<FilmImageService>();
 
             services.AddControllers();
         }
