@@ -11,7 +11,5 @@ namespace SWIAPI.Models
         public string Name { get; set; }
         public string SwapiUrl { get; set; }
         public string ImageUrl { get; set; }
-
-        //[BsonElement("Name")] used to define the column name
     }
 }

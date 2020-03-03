@@ -22,17 +22,5 @@ namespace SWIAPI.Services
 
         public PeopleImage Get(string id) =>
             _peopleImages.Find(peopleImage => peopleImage.Id == id).FirstOrDefault();
-
-        //public PeopleImage Create(PeopleImage peopleImage)
-        //{
-        //    _peopleImages.InsertOne(peopleImage);
-        //    return peopleImage;
-        //}
-
-        //public void Update(string id, PeopleImage peopleImageIn) =>
-        //    _peopleImages.ReplaceOne(peopleImage => peopleImage.Id == id, peopleImageIn);
-
-        //public void Remove(string id) =>
-        //    _peopleImages.DeleteOne(peopleImage => peopleImage.Id == id);
     }
 }
