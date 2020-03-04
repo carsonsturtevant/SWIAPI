@@ -16,5 +16,9 @@
     <PackageReference Include="MongoDB.Driver" Version="2.10.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include=".circleci\config.yml" />
+  </ItemGroup>
+
 
 </Project>
