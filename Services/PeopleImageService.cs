@@ -1,7 +1,10 @@
-﻿using MongoDB.Driver;
+﻿
+using MongoDB.Driver;
+using Newtonsoft.Json;
 using SWIAPI.Data;
 using SWIAPI.Models;
 using System.Collections.Generic;
+using System.IO;
 
 namespace SWIAPI.Services
 {
@@ -15,6 +18,13 @@ namespace SWIAPI.Services
             var database = client.GetDatabase(settings.DatabaseName);
 
             _peopleImages = database.GetCollection<PeopleImage>(settings.PeopleImageCollectionName);
+
+            if (_peopleImages.Find(peopleImage => true).ToList().Count == 0)
+            {
+                var data = File.ReadAllText("./Data/Json/peopleimage_collection.json");
+                var dataSerialized = JsonConvert.DeserializeObject<List<PeopleImage>>(data);
+                _peopleImages.InsertMany(dataSerialized);
+            }
         }
 
         public List<PeopleImage> Get() =>
