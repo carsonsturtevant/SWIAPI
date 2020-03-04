@@ -27,6 +27,13 @@ namespace SWIAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.Configure<PeopleImageDatabaseSettings>(
                 Configuration.GetSection(nameof(PeopleImageDatabaseSettings)));
             services.AddSingleton<IPeopleImageDatabaseSettings>(sp =>
@@ -49,6 +56,8 @@ namespace SWIAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("MyPolicy");
 
             app.UseHttpsRedirection();
 
