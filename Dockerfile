@@ -1,16 +1,19 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
+# https://hub.docker.com/_/microsoft-dotnet-core
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /source
 
-# Copy csproj and restore as distinct layers
-COPY *.csproj .
+# copy csproj and restore as distinct layers
+COPY *.sln .
+COPY aspnetapp/*.csproj ./aspnetapp/
 RUN dotnet restore
 
-# Copy everything else and build
-COPY . .
+# copy everything else and build app
+COPY aspnetapp/. ./aspnetapp/
+WORKDIR /source/aspnetapp
 RUN dotnet publish -c Release -o /app --no-restore
 
-# Build runtime image
+# final stage/image
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
-COPY --from=build-env /app .
-CMD dotnet SWIAPI.dll --launch-profile "Production"
+COPY --from=build /app ./
+ENTRYPOINT ["dotnet", "SWIAPI.dll"]

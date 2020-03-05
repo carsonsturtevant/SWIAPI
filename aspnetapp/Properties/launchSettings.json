@@ -20,7 +20,7 @@
     "Production": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/peopleimage",
+      "launchUrl": "",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"
       }
