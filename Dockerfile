@@ -13,4 +13,4 @@ RUN dotnet publish -c Release -o /app --no-restore
 FROM mcr.microsoft.com/dotnet/core/runtime:3.1
 WORKDIR /app
 COPY --from=build-env /app .
-ENTRYPOINT ["./swiapi"]
+CMD dotnet SWIAPI.dll --launch-profile "Production"
